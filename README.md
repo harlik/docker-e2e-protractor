@@ -2,10 +2,7 @@
 
 **General Docker image for executing headless Google Chrome or Firefox Protractor e2e test cases in a Docker container. The created image does not contain any test code or project. This is the environment for running Protractor test cases. So this image is test project independent.**
 
-The [Dockerfile](Dockerfile) was design based on the following projects:
-- [Protractor and headless Chrome on Docker](http://float-middle.com/protractor-and-headless-chrome-on-docker-with-video-tutorial/) or [Docker image of Protractor with headless Chrome](https://github.com/jciolek/docker-protractor-headless)
-- [docker-protractor](https://github.com/School-Improvement-Network/docker-protractor)
-- [Protractor-Firefox-Headless-Docker](https://github.com/cfalguiere/Protractor-Firefox-Headless-Docker)
+This project was forked from [SequenceIQ's docker-e2e-protractor project](https://github.com/sequenceiq/docker-e2e-protractor). The reason for the divergence is that SequenceIQ's script will only execute the Protractor binary. However, projects may want a higher order script to do more than just run tests, such as use the [protractor-webpack module](https://github.com/thompsnm/protractor-webpack) to synchronize serving a development build of your service with running Protractor tests. This project allows for executing arbitrary scripts instead of always calling to the Protractor binary.
 
 # To run your test cases in this image
 
@@ -14,10 +11,10 @@ The [Dockerfile](Dockerfile) was design based on the following projects:
 3. **The Protractor configuration file is vital for the Docker image**. Add your e2e test configuration JS file (for example `e2e.conf.js`). Beside this you can provide additional parameters here for protractor.
 4. You can see some example for execute your protractor tests in this [Docker](https://docs.docker.com/engine/installation/) container:
     ```
-    docker run -it --rm --name protractor-runner -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor e2e.conf.js    
-    docker run -it --rm --name protractor-runner --env-file utils/testenv -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor e2e.conf.js --suite smoke
-    docker run -it --rm --name protractor-runner -e USERNAME=teszt.elek -e PASSWORD=Teszt12 -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor e2e.conf.js --suite regression
-    docker run -it --rm --name protractor-runner --privileged --net=host -v /dev/shm:/dev/shm -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor e2e.conf.js --suite smoke    
+    docker run -it --rm --name protractor-runner -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor protractor e2e.conf.js    
+    docker run -it --rm --name protractor-runner --env-file utils/testenv -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor protractor e2e.conf.js --suite smoke
+    docker run -it --rm --name protractor-runner -e USERNAME=teszt.elek -e PASSWORD=Teszt12 -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor protractor e2e.conf.js --suite regression
+    docker run -it --rm --name protractor-runner --privileged --net=host -v /dev/shm:/dev/shm -v $(PWD):/protractor/project hortonworks/docker-e2e-protractor protractor e2e.conf.js --suite smoke    
     ```
 
   - `utils/testenv` the location (full path) of the `testenv` file on your machine. This file can contain environment variables for your new container.
