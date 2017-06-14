@@ -23,12 +23,12 @@ Xvfb :10 -screen 0 1920x1080x24 2>&1 >/dev/null &
 #echo "Finished starting webdriver"
 sleep 20
 
-echo "Running Protractor tests"
+echo "Running test script"
 # The script to execute tests should be passed here.
 DISPLAY=:10 $@
 export RESULT=$?
 
-echo "Protractor tests have done"
+echo "Test script is completed"
 # Close the XVFB display
 killall Xvfb
 # Remove temporary folders
