@@ -21,8 +21,8 @@ export RESULT=$?
 
 echo "Test script is completed"
 # Close the XVFB display
-pkillall Xvfb
+# pkillall Xvfb
 # Remove temporary folders
-rm -rf .config .local .pki .cache .dbus .gconf .mozilla
+# rm -rf .config .local .pki .cache .dbus .gconf .mozilla
 
 exit $RESULT
